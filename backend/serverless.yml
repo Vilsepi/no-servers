@@ -18,11 +18,6 @@ provider:
   environment:
     TABLE_NAME: ampparit
 
-package:
-  exclude:
-    - "*.txt"
-    - "*.md"
-
 functions:
   fetcher:
     handler: fetcher.handler
@@ -40,6 +35,14 @@ functions:
     events:
       - http: GET items/{id}
 
+package:
+  exclude:
+    - "*.txt"
+    - "*.md"
+    - "*.json"
+    - "client"
+    - "node_modules"
+
 resources:
   Resources:
     NewsTable:
@@ -55,3 +58,24 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+    WebAppS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.domainName}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+    DomainName:
+      Type: AWS::Route53::RecordSet
+      Properties:
+        #Name: ${self:custom.domainName}.
+        Name: serverless.heap.fi.
+        AliasTarget:
+          DNSName: !Ref 
+          HostedZoneId:
+        Type: A
+        HostedZoneId:
+
+custom:
+  domainName: serverless.heap.fi
