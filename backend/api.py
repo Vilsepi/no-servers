@@ -9,7 +9,6 @@ table_name = os.environ.get("TABLE_NAME")
 table = boto3.resource("dynamodb").Table(table_name)
 
 def _log_dynamo(response):
-    print response
     print "HTTPStatusCode:{}, RetryAttempts:{}, ScannedCount:{}, Count:{}".format(
         response.get("ResponseMetadata").get("HTTPStatusCode"),
         response.get("ResponseMetadata").get("RetryAttempts"),
@@ -18,7 +17,7 @@ def _log_dynamo(response):
     )
 
 def get_items(event, context):
-    response = table.scan()
+    response = table.scan(Limit=10)
     _log_dynamo(response)
     return {
         "statusCode": 200,
