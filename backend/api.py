@@ -21,7 +21,8 @@ def get_items(event, context):
     _log_dynamo(response)
     return {
         "statusCode": 200,
-        "body": json.dumps(response["Items"], indent=1)
+        "body": json.dumps(response["Items"], indent=1),
+        "headers": {"Access-Control-Allow-Origin": "*"}
     }
 
 def get_item(event, context):
