@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>No Servers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/css/reveal.min.css">
+    <link rel="stylesheet" href="assets/theme.css" id="theme">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/lib/css/zenburn.min.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown="README.md"
+                 data-separator="^\n---\n$"
+                 data-separator-vertical="^\n--\n$"
+                 data-separator-notes="^Notes:">
+        </section>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/lib/js/head.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/js/reveal.min.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        width: 1024,
+        height: 768,
+        transition: 'linear',
+        dependencies: [
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/plugin/markdown/marked.js', 
+          condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/plugin/markdown/markdown.min.js', 
+          condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/plugin/notes/notes.min.js', 
+          async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/plugin/highlight/highlight.min.js', 
+          async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+          ]
+      });
+    </script>
+  </body>
+</html>
