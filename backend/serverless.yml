@@ -65,7 +65,7 @@ resources:
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html
-          ErrorDocument: index.html
+          ErrorDocument: error.html
     DomainName:
       Type: AWS::Route53::RecordSet
       Properties:
