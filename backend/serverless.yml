@@ -34,7 +34,10 @@ functions:
     handler: api.get_items
     memorySize: 256
     events:
-      - http: GET items
+      - http:
+          path: items
+          method: get
+          cors: true
   apiGetItem:
     handler: api.get_item
     memorySize: 256
