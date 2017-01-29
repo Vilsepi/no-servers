@@ -1,9 +1,15 @@
 service: ampparit
 
+custom:
+  parentDomainName: heap.fi
+  domainName: serverless.heap.fi
+  tableName: ampparit
+  region: eu-west-1
+
 provider:
   name: aws
   runtime: python2.7
-  region: eu-west-1
+  region: ${self:custom.region}
   profile: heap
   iamRoleStatements:
     - Effect: Allow
@@ -14,9 +20,9 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:Scan
         - dynamodb:GetItem
-      Resource: "arn:aws:dynamodb:eu-west-1:*:*"
+      Resource: "arn:aws:dynamodb:${self:custom.region}:*:*"
   environment:
-    TABLE_NAME: ampparit
+    TABLE_NAME: ${self:custom.tableName}
 
 functions:
   fetcher:
@@ -48,7 +54,7 @@ resources:
     NewsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ampparit
+        TableName: ${self:custom.tableName}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
@@ -69,13 +75,9 @@ resources:
     DomainName:
       Type: AWS::Route53::RecordSet
       Properties:
-        #Name: ${self:custom.domainName}.
-        Name: serverless.heap.fi.
-        AliasTarget:
-          DNSName: !Ref 
-          HostedZoneId:
-        Type: A
-        HostedZoneId:
-
-custom:
-  domainName: serverless.heap.fi
+        HostedZoneName: ${self:custom.parentDomainName}.
+        Name: ${self:custom.domainName}.
+        Type: CNAME
+        TTL: 300
+        ResourceRecords:
+          - ${self:custom.domainName}.s3-website-${self:custom.region}.amazonaws.com
