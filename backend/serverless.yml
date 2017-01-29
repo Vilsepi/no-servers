@@ -64,7 +64,7 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    WebAppS3Bucket:
+    FrontendBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.domainName}
@@ -72,6 +72,17 @@ resources:
         WebsiteConfiguration:
           IndexDocument: index.html
           ErrorDocument: error.html
+    FrontendBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: FrontendBucket
+        PolicyDocument:
+          Statement:
+            - Action: s3:GetObject
+              Effect: Allow
+              Resource: arn:aws:s3:::${self:custom.domainName}/*
+              Principal: "*"
     DomainName:
       Type: AWS::Route53::RecordSet
       Properties:
