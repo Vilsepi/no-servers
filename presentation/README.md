@@ -74,11 +74,86 @@ more dev, less ops?
 
 ![Lambda Proxy](assets/images/lambda_proxy.png)
 
---
+---
 
 ### AWS Serverless Application Model
 
-Well, not so cool :(
+- Herokuish tools to deploy functions and interfaces
+
+--
+
+<pre><code data-trim="" class="yaml">
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  GetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.get
+      Runtime: nodejs4.3
+      Policies: AmazonDynamoDBReadOnlyAccess
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Table
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /resource/{resourceId}
+            Method: get
+  Table:
+    Type: AWS::Serverless::SimpleTable
+</code></pre>
+
+--
+
+### Deploying is easy, right?
+
+First we preprocess the cloudformation template
+
+    aws cloudformation package
+      --template-file original.yml
+      --output-template-file compiled.yml
+      --s3-bucket mahbucket
+
+Then we deploy the cloudformation stack
+
+    aws cloudformation deploy
+      --template-file compiled.yml
+      --stack-name mahstack
+      --capabilities CAPABILITY_IAM
+
+--
+
+```
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+function deps {
+  rm -rf ../build
+  mkdir -p ../build
+  pip install -r requirements.txt -t ../build/
+}
+function package {
+  cp -rf {tweet,healthcheck} ../build/
+  cp -f {*.py,sam.yml} ../build/
+  cd ../build
+  aws cloudformation package --template-file killMeNow.yml
+}
+```
+
+So I'll just wrap the awscli with a little bit of extra tooling, no biggie... Uhh, how did I get here?
+
+--
+
+- No way to exclude files in deployment
+- Function deployment is slow via CloudFormation change sets
+- No local invocation of functions
+- No easy way to view logs
+
+--
+
+*"Conclusion: Creating, deploying and managing a serverless app **has never been easier**."*
 
 ---
 
