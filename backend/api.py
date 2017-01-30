@@ -32,3 +32,21 @@ def get_item(event, context):
         "statusCode": 200,
         "body": json.dumps(response["Item"], indent=1)
     }
+
+def echo(event, context):
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "lambdaRequestEvent": event,
+            "lambdaContext": {
+                "function_name": context.function_name,
+                "function_version": context.function_version,
+                "memory_limit_in_mb": context.memory_limit_in_mb,
+                "remaining_time_in_millis": context.get_remaining_time_in_millis()
+            }
+        }, indent=1),
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "MyCustomHeader": "Hello Header"
+        }
+    }

@@ -43,6 +43,11 @@ functions:
     memorySize: 256
     events:
       - http: GET items/{id}
+  apiEcho:
+    handler: api.echo
+    memorySize: 128
+    events:
+      - http: GET echo
 
 package:
   exclude:
