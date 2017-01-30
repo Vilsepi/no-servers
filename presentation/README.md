@@ -159,6 +159,52 @@ So I'll just wrap the awscli with a little bit of extra tooling, no biggie... Uh
 
 ### Serverless Framework
 
+- Easy deployment! Fast function updates! Automatically create artifact bucket!
+- Invoke from your terminal! Logs in your terminal! Run functions locally!
+- Supports AWS Lambda, Google CloudFunctions and Azure Functions
+- Not enough? Plugins!
+
+--
+
+<pre><code data-trim="" class="python">
+sudo npm install -g serverless
+sls create --template aws-nodejs
+
+sls deploy -v
+sls deploy function -f fetcher
+
+sls invoke -f fetcher -l
+sls logs -f fetcher -t
+
+sls remove
+</code></pre>
+
+--
+
+<pre><code data-trim="" class="yaml">
+service: acme-service
+custom:
+  acmeVariable: acme-variable
+provider:
+  name: aws
+functions:
+  acmeApiFunction:
+    handler: api.get_item
+    events:
+      - http: GET items/{id}
+package:
+  exclude:
+    - "do_not_upload_me.txt"
+resources:
+  Resources:
+    AcmeDynamoTable:
+      Type: AWS::DynamoDB::Table
+</code></pre>
+
+--
+
+### Demo
+
 --
 
 ### What about the frontend assets?
@@ -169,25 +215,6 @@ So I'll just wrap the awscli with a little bit of extra tooling, no biggie... Uh
   - Requires a fork to support latest Serverless
   - Does not delete bucket if renamed
   - Does not create Route53 DNS Record or CloudFront distribution
-
---
-
-```
-    plugins:
-      - serverless-client-s3
-    custom:
-      client:
-        bucketName: serverless.heap.fi
-
-    # package.json
-    {
-      "name": "no-servers-frontend",
-      "version": "0.0.1",
-      "devDependencies": {
-        "serverless-client-s3": "git://github.com/kevzettler/serverless-client-s3.git#serverless_1.0_beta_compatibility"
-      }
-    }
-```
 
 ---
 
