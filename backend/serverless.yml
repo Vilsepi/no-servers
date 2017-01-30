@@ -47,7 +47,9 @@ functions:
     handler: api.echo
     memorySize: 128
     events:
-      - http: GET echo
+      - http:
+          path: echo/{subpath}
+          method: any
 
 package:
   exclude:
