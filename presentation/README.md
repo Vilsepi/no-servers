@@ -1,26 +1,26 @@
 
 # Serverless
 
-More dev, less ops?
+more dev, less ops?
 
 ---
 
-## Term confusion
+### Which serverless?
 
 - [Serverless Computing:](https://en.wikipedia.org/wiki/Serverless_computing) Functions-as-a-service, run applications with less infrastructure management
 - [Serverless Framework:](https://github.com/serverless/serverless) 3rd-party tools for easier serverless development across several cloud providers
-- [AWS Serverless Application Model:](https://github.com/awslabs/serverless-application-model) specification and tools to develop serverless apps more easily in AWS
+- [Serverless Application Model:](https://github.com/awslabs/serverless-application-model) AWS specification and tools to develop serverless apps more easily
 
----
+--
 
 ![Serverless stack](assets/images/serverless_stack.png)
 
----
+--
 
 [![Serverless Architecture](assets/images/aws_serverless_architecture.png)](https://github.com/awslabs/lambda-refarch-webapp)
 <!-- .slide: data-background="#fff" -->
 
---
+---
 
 ### AWS Lambda
 
@@ -28,9 +28,13 @@ More dev, less ops?
 
 --
 
-### Lambda features in 1 slide
+### Code execution as a service
 
-- stuff
+- No servers, SSH keys, networks, IP addresses
+- Python 2.7, Node 4.3, Java 8, C#
+- Automatic scaling, each request is handled individually
+- Charged by code execution time for each 100ms
+- Metrics, logging, versioning
 
 --
 
@@ -40,16 +44,17 @@ More dev, less ops?
 
 --
 
-### API Gateway features in 1 slide
+### HTTPS Proxy as a service
 
 - Proxying, schemas, transformations
-- Authorization (API keys)
-- Stages (dev, prod...)
+- Authorization (API keys), throttling, quota
+- Stages (dev, prod...) & versioning
 - Caching
+- SDK generation
 
 ---
 
-## Previously life was hard
+### Previously life was hard
 
 - Creating and managing Lambda functions is hard
 - Deploying (new versions) is hard
@@ -57,7 +62,7 @@ More dev, less ops?
 
 --
 
-## Life-improvements
+### Life-improvements
 
 - [AWS Serverless Application Model:](https://github.com/awslabs/serverless-application-model) Define and deploy functions and interfaces as YAML.
 - [Environment Variables:](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-environment-variables-and-serverless-application-model/) variate function without changing and redeploying code.
@@ -71,13 +76,13 @@ More dev, less ops?
 
 --
 
-## AWS Serverless Application Model
+### AWS Serverless Application Model
 
 Well, not so cool :(
 
 ---
 
-## Serverless Framework
+### Serverless Framework
 
 --
 
@@ -111,7 +116,7 @@ Well, not so cool :(
 
 ---
 
-## Conclusions
+### Conclusions
 
 [Use Serverless Framework](https://serverless.com/)
 
