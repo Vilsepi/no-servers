@@ -40,7 +40,7 @@ more dev, less ops?
 
 ### AWS API Gateway
 
-![AWS Lambda](assets/images/apigateway.png)
+![AWS Lambda](assets/images/apigateway_flow.png)
 
 --
 
