@@ -206,6 +206,17 @@ resources:
 
 --
 
+### Demo
+
+- Serverless.yml
+- Lambda handlers
+- Stack and function deployment
+- Function invocation and logs
+- Echo interface
+- AWS Web Console
+
+--
+
 ### What about the frontend assets?
 
 - **[serverless-single-page-app-plugin](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront)**
