@@ -124,7 +124,7 @@ Then we deploy the cloudformation stack
 - Function deployment is slow via CloudFormation change sets
 - You have to manually create a bucket where to upload your code
 - No way to exclude files in deployment
-- No local invocation of functions
+- No local execution of functions
 - No easy way to view logs
 
 --
