@@ -16,7 +16,7 @@ body {
   padding: 15px;
 }
 
-a {
+.item a {
   text-decoration: none;
   color: #000;
 }
@@ -24,4 +24,8 @@ a {
 h1 {
   font-size: 24px;
   font-weight: normal;
+}
+
+div#apiurl {
+  margin-bottom: 20px;
 }
