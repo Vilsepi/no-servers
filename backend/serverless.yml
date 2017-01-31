@@ -55,9 +55,8 @@ package:
   exclude:
     - "*.txt"
     - "*.md"
+    - "*.yml"
     - "*.json"
-    - "client"
-    - "node_modules"
 
 resources:
   Resources:
