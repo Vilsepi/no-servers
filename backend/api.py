@@ -34,6 +34,7 @@ def get_item(event, context):
     }
 
 def echo(event, context):
+    print event
     return {
         "statusCode": 200,
         "body": json.dumps({
