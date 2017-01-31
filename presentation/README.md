@@ -54,23 +54,17 @@ more dev, less ops?
 
 ---
 
-### Previously life was hard
+### Life improvements
 
-- Creating and managing Lambda functions is hard
-- Deploying (new versions) is hard
-- Managing APIs is hard. There was [aws-apigateway-importer](https://github.com/awslabs/aws-apigateway-importer) but 
-
---
-
-### Life-improvements
-
-- [AWS Serverless Application Model:](https://github.com/awslabs/serverless-application-model) Define and deploy functions and interfaces as YAML.
 - [Environment Variables:](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-environment-variables-and-serverless-application-model/) variate function without changing and redeploying code.
-- [API Gateway Lambda Proxy:](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html) Much simpler integration without template mapping.
+- Run Lambdas on CloudFront [edge locations](https://aws.amazon.com/blogs/aws/coming-soon-lambda-at-the-edge/).
+- Native Swagger support instead of [separate tool](https://github.com/awslabs/aws-apigateway-importer).
+- Define and deploy functions and interfaces in [Serverless Application Model](https://github.com/awslabs/serverless-application-model) YAML.
+- Much simpler [Gateway-Lambda Proxy](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html) integration without template mapping.
 
 --
 
-### Proxy instead of Mapping Templates
+### Simpler Lambda Proxy
 
 ![Lambda Proxy](assets/images/lambda_proxy.png)
 
@@ -78,7 +72,9 @@ more dev, less ops?
 
 ### AWS Serverless Application Model
 
-- Herokuish tools to deploy functions and interfaces
+- Additions to CloudFormation syntax and AWS CLI tools
+- Describe Lambda functions and their API Gateway routing in a single YAML file
+- Much simple than the API Gateway Swagger Extensions
 
 --
 
@@ -125,6 +121,16 @@ Then we deploy the cloudformation stack
 
 --
 
+- Function deployment is slow via CloudFormation change sets
+- You have to manually create a bucket where to upload your code
+- No way to exclude files in deployment
+- No local invocation of functions
+- No easy way to view logs
+
+--
+
+So I'll just write some wrapping...
+
 ```
 #!/bin/bash
 set -euo pipefail
@@ -142,14 +148,7 @@ function package {
 }
 ```
 
-So I'll just wrap the awscli with a little bit of extra tooling, no biggie... Uhh, how did I get here?
-
---
-
-- No way to exclude files in deployment
-- Function deployment is slow via CloudFormation change sets
-- No local invocation of functions
-- No easy way to view logs
+...Uhh, how did I get here?
 
 --
 
@@ -157,12 +156,12 @@ So I'll just wrap the awscli with a little bit of extra tooling, no biggie... Uh
 
 ---
 
-### Serverless Framework
+### [Serverless Framework](https://serverless.com/)
 
 - Easy deployment! Fast function updates! Automatically create artifact bucket!
 - Invoke from your terminal! Logs in your terminal! Run functions locally!
 - Supports AWS Lambda, Google CloudFunctions and Azure Functions
-- Not enough? Plugins!
+- Not convinced? Plugins!
 
 --
 
@@ -203,7 +202,7 @@ resources:
 
 --
 
-### Demo
+![Demo application](assets/images/demo_application_architecture.png)
 
 --
 
@@ -220,7 +219,7 @@ resources:
 
 ### Conclusions
 
-[Use Serverless Framework](https://serverless.com/)
+[Serverless Framework](https://serverless.com/)
 
 [AWS Serverless Architecture Whitepaper](https://d0.awsstatic.com/whitepapers/AWS_Serverless_Multi-Tier_Architectures.pdf)
 
